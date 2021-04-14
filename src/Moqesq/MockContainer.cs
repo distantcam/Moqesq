@@ -39,4 +39,8 @@ namespace Moqesq
             => (Mock<TMock>)MocksByType[typeof(TMock)];
     }
 
+    public static class MockContainer
+    {
+        public static MockArrange<T> Arrange<T>(Action<MockContainer<T>> arrange) where T : notnull => new MockArrange<T>(arrange);
+    }
 }

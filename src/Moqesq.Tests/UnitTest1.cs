@@ -1,4 +1,4 @@
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
@@ -45,7 +45,16 @@ namespace Moqesq.Tests
                 .PerformTest(
                 (result, container) => Assert.AreEqual(null, result));
 
-        }        
+        }
+
+        [TestMethod]
+        public void TestMethod5()
+        {
+            MockContainer
+                .Arrange<SomeClass>(container => container.GetRequiredMock<ITest>().Setup(t => t.GetAString()).Returns("123"))
+                .Act(someClass => someClass.Bla2())
+                .Assert((result, container) => Assert.AreEqual("123", result));
+        }
     }
 
 }
